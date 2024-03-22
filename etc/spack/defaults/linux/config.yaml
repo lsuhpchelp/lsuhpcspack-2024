@@ -29,9 +29,6 @@ config:
     # assuming it is higher than the length of the install_tree root.
     # padded_length: 128
 
-  module_roots:
-    tcl:    /usr/local/packages/Modules/modulefiles
-
   # Locations where templates should be found
   template_dirs:
     - $spack/share/spack/templates
