@@ -1,28 +1,13 @@
-# -------------------------------------------------------------------------
-# This file controls default concretization preferences for Spack.
-#
-# Settings here are versioned with Spack and are intended to provide
-# sensible defaults out of the box. Spack maintainers should edit this
-# file to keep it current.
-#
-# Users can override these settings by editing the following files.
-#
-# Per-spack-instance settings (overrides defaults):
-#   $SPACK_ROOT/etc/spack/packages.yaml
-#
-# Per-user settings (overrides default and site settings):
-#   ~/.spack/packages.yaml
-# -------------------------------------------------------------------------
 packages:
   all:
-    compiler: [gcc, intel, pgi, clang, xl, nag, fj, aocc]
+    compiler: [oneapi,nvhpc,gcc]
     providers:
       awk: [gawk]
-      blas: [openblas, amdblis]
+      blas: [intel-oneapi-mkl+cluster, openblas, amdblis]
       D: [ldc]
       daal: [intel-oneapi-daal]
       elf: [elfutils]
-      fftw-api: [fftw, amdfftw]
+      fftw-api: [intel-oneapi-mkl+cluster, fftw, amdfftw]
       flame: [libflame, amdlibflame]
       fuse: [libfuse]
       gl: [glx, osmesa]
@@ -33,16 +18,16 @@ packages:
       ipp: [intel-oneapi-ipp]
       java: [openjdk, jdk, ibm-java]
       jpeg: [libjpeg-turbo, libjpeg]
-      lapack: [openblas, amdlibflame]
+      lapack: [intel-oneapi-mkl+cluster, openblas, amdlibflame]
       libglx: [mesa+glx, mesa18+glx]
       libllvm: [llvm]
       libosmesa: [mesa+osmesa, mesa18+osmesa]
       lua-lang: [lua, lua-luajit-openresty, lua-luajit]
       luajit: [lua-luajit-openresty, lua-luajit]
       mariadb-client: [mariadb-c-client, mariadb]
-      mkl: [intel-oneapi-mkl]
+      mkl: [intel-oneapi-mkl+cluster]
       mpe: [mpe2]
-      mpi: [openmpi, mpich]
+      mpi: [intel-oneapi-mpi,mvapich2,openmpi,mpich]
       mysql-client: [mysql, mariadb-c-client]
       opencl: [pocl]
       onedal: [intel-oneapi-dal]
@@ -51,16 +36,286 @@ packages:
       pkgconfig: [pkgconf, pkg-config]
       qmake: [qt-base, qt]
       rpc: [libtirpc]
-      scalapack: [netlib-scalapack, amdscalapack]
+      scalapack: [intel-oneapi-mkl+cluster, netlib-scalapack, amdscalapack]
       sycl: [hipsycl]
       szip: [libaec, libszip]
-      tbb: [intel-tbb]
+      tbb: [intel-oneapi-tbb]
       unwind: [libunwind]
       uuid: [util-linux-uuid, libuuid]
       xxd: [xxd-standalone, vim]
       yacc: [bison, byacc]
       ziglang: [zig]
-      zlib-api: [zlib-ng+compat, zlib]
+      zlib-api: [zlib,zlib-ng+compat]
     permissions:
       read: world
       write: user
+  hdf5:
+    variants: +cxx +fortran
+  netcdf-c:
+    variants: ~blosc
+  lapack:
+    require: 'intel-oneapi-mkl +cluster'
+  blas:
+    require: 'intel-oneapi-mkl +cluster'
+  scalapack:
+    require: 'intel-oneapi-mkl +cluster'
+  binutils:
+    externals:
+    - spec: binutils@2.30.119
+      prefix: /usr
+    buildable: false
+  coreutils:
+    externals:
+    - spec: coreutils@8.30
+      prefix: /usr
+    buildable: false
+  diffutils:
+    externals:
+    - spec: diffutils@3.6
+      prefix: /usr
+    buildable: false
+  findutils:
+    externals:
+    - spec: findutils@4.6.0
+      prefix: /usr
+    buildable: false
+  gawk:
+    externals:
+    - spec: gawk@4.2.1
+      prefix: /usr
+    buildable: false
+  openssh:
+    externals:
+    - spec: openssh@8.0p1
+      prefix: /usr
+    buildable: false
+  openssl:
+    externals:
+    - spec: openssl@1.1.1k
+      prefix: /usr
+    buildable: false
+  tar:
+    externals:
+    - spec: tar@1.30
+      prefix: /usr
+    buildable: false
+  autoconf:
+    externals:
+    - spec: autoconf@2.69
+      prefix: /usr
+    buildable: false
+  automake:
+    externals:
+    - spec: automake@1.16.1
+      prefix: /usr
+    buildable: false
+  bison:
+    externals:
+    - spec: bison@3.0.4
+      prefix: /usr
+    buildable: false
+  cmake:
+    externals:
+    - spec: cmake@3.20.2
+      prefix: /usr
+  curl:
+    externals:
+    - spec: curl@7.61.1+gssapi+ldap+nghttp2
+      prefix: /usr
+    buildable: false
+  flex:
+    externals:
+    - spec: flex@2.6.1+lex
+      prefix: /usr
+    buildable: false
+  git:
+    externals:
+    - spec: git@2.39.1~tcltk
+      prefix: /usr
+    buildable: false
+  gmake:
+    externals:
+    - spec: gmake@4.2.1
+      prefix: /usr
+    buildable: false
+  groff:
+    externals:
+    - spec: groff@1.22.3
+      prefix: /usr
+    buildable: false
+  libtool:
+    externals:
+    - spec: libtool@2.4.6
+      prefix: /usr
+    buildable: false
+  m4:
+    externals:
+    - spec: m4@1.4.18
+      prefix: /usr
+    buildable: false
+  pkgconf:
+    externals:
+    - spec: pkgconf@1.4.2
+      prefix: /usr
+    buildable: false
+  subversion:
+    externals:
+    - spec: subversion@1.10.2
+      prefix: /usr
+    buildable: false
+  perl:
+    externals:
+    - spec: perl@5.26.3
+      prefix: /usr
+    buildable: false
+  ztsd:
+    externals:
+    - spec: ztsd@1.4.4
+      prefix: /usr
+    buildable: false
+  libpciaccess:
+    externals:
+    - spec: libpciaccess@0.14
+      prefix: /usr
+    buildable: false
+  python:
+    externals:
+    - spec: python@3.6.8
+      prefix: /usr
+    buildable: false
+  libxml2:
+    externals:
+    - spec: libxml2@2.9.7
+      prefix: /usr
+    buildable: false
+  intel-oneapi-mpi:
+    externals:
+    - spec: intel-oneapi-mpi@2021.11
+      prefix: /usr/local/compilers/intel
+    buildable: false
+  intel-oneapi-mkl:
+    externals:
+    - spec: intel-oneapi-mkl@2024.0
+      variants: +cluster ^intel-oneapi-mpi
+      prefix: /usr/local/compilers/intel
+    buildable: false
+  intel-oneapi-tbb:
+    externals:
+    - spec: intel-oneapi-tbb@2021.11
+      prefix: /usr/local/compilers/intel
+    buildable: false
+  zlib:
+    externals:
+    - spec: zlib@1.2.11
+      prefix: /usr
+    buildable: false
+  bzip2:
+    externals:
+    - spec: bzip2@1.0.6
+      prefix: /usr
+    buildable: false
+  zstd:
+    externals:
+    - spec: zstd@1.4.4
+      prefix: /usr
+    buildable: false
+  tcl:
+    externals:
+    - spec: tcl@8.6.8
+      prefix: /usr
+    buildable: false
+  sed:
+    externals:
+    - spec: sed@4.5.5
+      prefix: /usr
+    buildable: false
+  slurm:
+    externals:
+    - spec: slurm@23.11.4
+      prefix: /usr
+    buildable: false
+  readline:
+    externals:
+    - spec: readline@7.0
+      prefix: /usr
+    buildable: false
+  ncurses:
+    externals:
+    - spec: ncurses@6.1
+      prefix: /usr
+      #    buildable: false
+  gettext:
+    externals:
+    - spec: gettext@0.19.8.1
+      prefix: /usr
+    buildable: false
+  xz:
+    externals:
+    - spec: xz@5.2.4
+      prefix: /usr
+    buildable: false
+  gzip:
+    externals:
+    - spec: gzip@1.9
+      prefix: /usr
+    buildable: false
+  pango:
+    externals:
+    - spec: pango@1.42.4
+      prefix: /usr
+    buildable: false
+  cairo:
+    externals:
+    - spec: cairo@1.15.12
+      prefix: /usr
+    buildable: false
+  rdma-core:
+    externals:
+    - spec: rdma-core@41.0
+      prefix: /usr
+    buildable: false
+  gnutls:
+    externals:
+    - spec: gnutls@3.6.16
+      prefix: /usr
+    buildable: false
+  cpio:
+    externals:
+    - spec: cpio@2.12
+      prefix: /usr
+    buildable: false
+  freetype:
+    externals:
+    - spec: freetype@2.9.1
+      prefix: /usr
+    buildable: false
+  libjpeg-turbo:
+    externals:
+    - spec: libjpeg-turbo@1.5.3
+      prefix: /usr
+    buildable: false
+  libpng:
+    externals:
+    - spec: libpng@1.6.34
+      prefix: /usr
+    buildable: false
+  lzo:
+    externals:
+    - spec: lzo@2.0.8
+      prefix: /usr
+    buildable: false
+  lmdb:
+    externals:
+    - spec: lmdb@0.9.24
+      prefix: /usr
+    buildable: false
+  pcre:
+    externals:
+    - spec: pcre@8.42
+      prefix: /usr
+    buildable: false
+  pmix:
+    externals:
+    - spec: pmix@4.2.4
+      prefix: /usr/local/packages/pmix/4.2.4
+    buildable: false

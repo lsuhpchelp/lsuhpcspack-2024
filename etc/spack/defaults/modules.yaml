@@ -38,15 +38,35 @@ modules:
   default:
     # Where to install modules
     roots:
-     tcl:    $spack/share/spack/modules
-     lmod:   $spack/share/spack/lmod
+     tcl:    $spack/modules
+     lmod:   $spack/lmod
     # What type of modules to use ("tcl" and/or "lmod")
-    enable: []
-
+    enable: ["tcl"]
     tcl:
+      hash_length: 0
+      projections: 
+        all: '{name}/{version}/{compiler.name}-{compiler.version}'
+        gcc: '{name}/{version}'
+        ^oneapi: '{name}/{version}/intel-{compiler.version}'
+        ^gcc@8.5.0: '{name}/{version}'
+        cuda: '{name}/{version}'
+      include: ['gcc']
+      exclude: ['autoconf-archive','gmake','readline','ncurses','m4','binutils','cairo','charmpp','elpa','freetype','gdbm','gettext','gnutls','glib','htslib','autoconf','automake','bzip2','icu4c','libtool','bison','curl','diffutils','openssl','zlib','intel-mkl','intel-tbb','libdwarf','libedit','libelf','libevent','libfabric','libffi','libiconv','libint','libjpeg','libjpeg-turbo','libpciaccess','libpng','libtiff','libtirpc','libunwind','libxc','libxt','libxsmm','lmdb','numactl','openssh','otf2','pango','papi','pcre','pdt','pkg-config','qhull','rdma-core','slurm','subversion','expat','libarchive','libxml2','libiconv','libunistring','sqlite','tar','tcsh','tcl','tk','gmp','mpfr','isl','mpc','xz','zip','pkgconf','findutils','flex','cgal','libsodium','libzmq','sz','zft','zstd','perl@5.26.3','cmake@3.20.2','hwloc@2.2.0','texinfo','python@3.6.8','mesa@21.1.5','boost@1.66.0','intel-oneapi-mkl','sed','mpc','gawk','libaec']
       all:
         autoload: direct
-
+        conflict:
+        - '{name}'
+        suffixes:
+          ^python@2.7.14: python-2.7.14
+          ^python@3.8.8: python-3.8.8
+          ^mvapich2@2.3.3: mvapich-2.3.3
+          ^intel-oneapi-mpi@2021.5.1: intel-mpi-2021.5.1
+          ^mpich@3.3.2: mpich-3.3.2
+          +debug: debug
+          +cuda: cuda
+          +kokkos: kokkos
+          +hybra: hydra
+          process_managers=hydra: hydra
     # Default configurations if lmod is enabled
     lmod:
       all:
