@@ -192,17 +192,23 @@ packages:
     externals:
     - spec: intel-oneapi-mpi@2021.11
       prefix: /usr/local/compilers/intel
+      modules:
+      - intel-mpi/2021.11
     buildable: false
   intel-oneapi-mkl:
     externals:
     - spec: intel-oneapi-mkl@2024.0
       variants: +cluster ^intel-oneapi-mpi
       prefix: /usr/local/compilers/intel
+      modules:
+      - inteloneapi/2024.0.2
     buildable: false
   intel-oneapi-tbb:
     externals:
     - spec: intel-oneapi-tbb@2021.11
       prefix: /usr/local/compilers/intel
+      modules:
+      - inteloneapi/2024.0.2
     buildable: false
   zlib:
     externals:
