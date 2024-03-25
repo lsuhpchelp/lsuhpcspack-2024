@@ -47,6 +47,7 @@ modules:
       projections: 
         all: '{name}/{version}/{compiler.name}-{compiler.version}'
         gcc: '{name}/{version}'
+        openjdk: '{name}/{version}'
         ^oneapi: '{name}/{version}/intel-{compiler.version}'
         ^gcc@8.5.0: '{name}/{version}'
         cuda: '{name}/{version}'
