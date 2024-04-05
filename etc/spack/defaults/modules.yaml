@@ -60,6 +60,8 @@ modules:
         suffixes:
           ^intel-oneapi-mpi@2021.5.1: intel-mpi-2021.5.1
           ^mpich@3.3.2: mpich-3.3.2
+          ^mpich@4.1.2: mpich-4.1.2
+          ^openmpi@4.1.6: openmpi-4.1.6
           +debug: debug
           +cuda: cuda
           +kokkos: kokkos
