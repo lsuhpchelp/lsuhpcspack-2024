@@ -1,13 +1,13 @@
 packages:
   all:
-    compiler: [oneapi,nvhpc,gcc]
+    compiler: [intel@2021.5.0,nvhpc,gcc@13.2.0,gcc@8.5.0,oneapi@2022.0.0]
     providers:
       awk: [gawk]
-      blas: [intel-oneapi-mkl+cluster, openblas, amdblis]
+      blas: [intel-oneapi-mkl@2022.0.2+cluster, openblas, amdblis]
       D: [ldc]
       daal: [intel-oneapi-daal]
       elf: [elfutils]
-      fftw-api: [intel-oneapi-mkl+cluster, fftw, amdfftw]
+      fftw-api: [intel-oneapi-mkl@2022.0.2+cluster, fftw, amdfftw]
       flame: [libflame, amdlibflame]
       fuse: [libfuse]
       gl: [glx, osmesa]
@@ -18,16 +18,16 @@ packages:
       ipp: [intel-oneapi-ipp]
       java: [openjdk, jdk, ibm-java]
       jpeg: [libjpeg-turbo, libjpeg]
-      lapack: [intel-oneapi-mkl+cluster, openblas, amdlibflame]
+      lapack: [intel-oneapi-mkl@2022.0.2+cluster, openblas, amdlibflame]
       libglx: [mesa+glx, mesa18+glx]
       libllvm: [llvm]
       libosmesa: [mesa+osmesa, mesa18+osmesa]
       lua-lang: [lua, lua-luajit-openresty, lua-luajit]
       luajit: [lua-luajit-openresty, lua-luajit]
       mariadb-client: [mariadb-c-client, mariadb]
-      mkl: [intel-oneapi-mkl+cluster]
+      mkl: [intel-oneapi-mkl@2022.0.2+cluster]
       mpe: [mpe2]
-      mpi: [intel-oneapi-mpi,mvapich2,openmpi,mpich]
+      mpi: [intel-oneapi-mpi@2021.5.1,mvapich2,openmpi,mpich]
       mysql-client: [mysql, mariadb-c-client]
       opencl: [pocl]
       onedal: [intel-oneapi-dal]
@@ -36,10 +36,10 @@ packages:
       pkgconfig: [pkgconf, pkg-config]
       qmake: [qt-base, qt]
       rpc: [libtirpc]
-      scalapack: [intel-oneapi-mkl+cluster, netlib-scalapack, amdscalapack]
+      scalapack: [intel-oneapi-mkl@2022.0.2+cluster, netlib-scalapack, amdscalapack]
       sycl: [hipsycl]
       szip: [libaec, libszip]
-      tbb: [intel-oneapi-tbb]
+      tbb: [intel-oneapi-tbb@2021.5.1]
       unwind: [libunwind]
       uuid: [util-linux-uuid, libuuid]
       xxd: [xxd-standalone, vim]
@@ -54,11 +54,11 @@ packages:
   netcdf-c:
     variants: ~blosc
   lapack:
-    require: 'intel-oneapi-mkl +cluster'
+    require: 'intel-oneapi-mkl@2022.0.2 +cluster'
   blas:
-    require: 'intel-oneapi-mkl +cluster'
+    require: 'intel-oneapi-mkl@2022.0.2 +cluster'
   scalapack:
-    require: 'intel-oneapi-mkl +cluster'
+    require: 'intel-oneapi-mkl@2022.0.2 +cluster'
   binutils:
     externals:
     - spec: binutils@2.30.119
@@ -190,18 +190,18 @@ packages:
     buildable: false
   intel-oneapi-mpi:
     externals:
-    - spec: intel-oneapi-mpi@2021.11
+    - spec: intel-oneapi-mpi@2021.5.1
       prefix: /usr/local/compilers/intel
     buildable: false
   intel-oneapi-mkl:
     externals:
-    - spec: intel-oneapi-mkl@2024.0
-      variants: +cluster ^intel-oneapi-mpi
+    - spec: intel-oneapi-mkl@2022.0.2
+      variants: +cluster mpi_family=mpich
       prefix: /usr/local/compilers/intel
     buildable: false
   intel-oneapi-tbb:
     externals:
-    - spec: intel-oneapi-tbb@2021.11
+    - spec: intel-oneapi-tbb@2021.5.1
       prefix: /usr/local/compilers/intel
     buildable: false
   zlib:
@@ -316,6 +316,16 @@ packages:
     buildable: false
   pmix:
     externals:
-    - spec: pmix@4.2.4
-      prefix: /usr/local/packages/pmix/4.2.4
+    - spec: pmix@4.2.9
+      prefix: /usr/local/packages/pmix/4.2.9
+    buildable: false
+  numactl:
+    externals:
+    - spec: numactl@2.0.12
+      prefix: /usr
+    buildable: false
+  ucx:
+    externals:
+    - spec: ucx@1.16.0
+      prefix: /usr
     buildable: false
