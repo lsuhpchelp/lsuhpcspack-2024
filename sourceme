@@ -6,7 +6,7 @@ then
   . ./share/spack/setup-env.sh
 else
   #For Modules
-  export MODULEPATH=/usr/local/packages/Modules/modulefiles/linux-rhel8-icelake
+  export MODULEPATH=/usr/local/packages/Modules/modulefiles/linux-rhel8-ivybridge
   #For Spack
   . /usr/local/packages/spack/share/spack/setup-env.sh
 fi
