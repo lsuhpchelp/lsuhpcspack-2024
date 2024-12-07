@@ -17,25 +17,29 @@ class Namd(MakefilePackage, CudaPackage):
     high-performance simulation of large biomolecular systems."""
 
     homepage = "https://www.ks.uiuc.edu/Research/namd/"
-    url = "file://{0}/NAMD_2.12_Source.tar.gz".format(os.getcwd())
+    url = "file:///usr/local/packages/sources/manual_packages/NAMD_3.0b7_Source.tar.gz".format(os.getcwd())
     git = "https://charm.cs.illinois.edu/gerrit/namd.git"
     manual_download = True
 
     maintainers("jcphill")
 
     version("master", branch="master")
-    version("3.0b3", sha256="20c32b6161f9c376536e3cb97c3bfe5367e1baaaace3c716ff79831fc2eb8199")
+    #version("3.0", sha256="301c64f0f1db860f7336efdb26223ccf66b5ab42bfc9141df8d81ec1e20bf472")
+    version("3.0b7", sha256="b18ff43b0f55ec59e137c62eba1812589dd88b2122c3a05ea652781667f438b4")
+    #version("3.0b3", sha256="349b0d8a4b3272657ca75c22a7de4c9c09f55a547b9775882da43a53c48e3998")
     version("2.15a2", sha256="8748cbaa93fc480f92fc263d9323e55bce6623fc693dbfd4a40f59b92669713e")
     version("2.15a1", branch="master", tag="release-2-15-alpha-1")
+
     # Same as above, but lets you use a local file instead of git
     version(
         "2.15a1.manual", sha256="474006e98e32dddae59616b3b75f13a2bb149deaf7a0d617ce7fb9fd5a56a33a"
     )
     version(
         "2.14",
-        sha256="34044d85d9b4ae61650ccdba5cda4794088c3a9075932392dd0752ef8c049235",
+        sha256="f1516c79b8d6ba72f34f1a2c0b1d09b4eafd4e2f7bb1fc585fd9fe418d141976",
         preferred=True,
     )
+
     version("2.13", md5="9e3323ed856e36e34d5c17a7b0341e38")
     version("2.12", md5="2a1191909b1ab03bf0205971ad4d8ee9")
 
@@ -64,7 +68,9 @@ class Namd(MakefilePackage, CudaPackage):
     # Handle change in python-config for python@3.8:
     patch("namd-python38.patch", when="interface=python ^python@3.8:")
 
-    depends_on("charmpp@7.0.0:", when="@3.0b3")
+    #depends_on("charmpp@7.0.0:", when="@3.0")
+    #depends_on("charmpp@7.0.0:", when="@3.0b3")
+    depends_on("charmpp@6.12.2:", when="@3.0b7")
     depends_on("charmpp@6.10.1:6", when="@2.14:2")
     depends_on("charmpp@6.8.2", when="@2.13")
     depends_on("charmpp@6.7.1", when="@2.12")
