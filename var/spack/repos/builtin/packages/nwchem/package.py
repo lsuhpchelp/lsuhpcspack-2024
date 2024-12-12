@@ -28,6 +28,15 @@ class Nwchem(Package):
         url="https://github.com/nwchemgit/nwchem/releases/download/v7.0.2-release/nwchem-7.0.2-release.revision-b9985dfa-srconly.2020-10-12.tar.bz2",
     )
 
+    resource(
+        name="dftd3.tgz",
+        url="https://www.chemie.uni-bonn.de/grimme/de/software/dft-d3/dftd3.tgz",
+        destination="",
+        placement="dft-d3",
+        sha256="d97cf9758f61aa81fd85425448fbf4a6e8ce07c12e9236739831a3af32880f59",
+        expand=False,
+    )
+
     variant("openmp", default=False, description="Enables OpenMP support")
     variant("mpipr", default=False, description="Enables ARMCI with progress rank")
     variant("fftw3", default=False, description="Link against the FFTW library")
@@ -47,6 +56,10 @@ class Nwchem(Package):
     # https://github.com/nwchemgit/nwchem/commit/c89fc9d1eca6689bce12564a63fdea95d962a123
     # Prior versions of NWChem, including 7.0.2, were not able to link with FFTW
     patch("fftw_splans.patch", when="@7.2.0")
+    # This patch is for including a working link for dft-d3 download as existing link
+    # https://www.chemiebn.uni-bonn.de/pctc/mulliken-center/software/dft-d3//dftd3.tgz is not active
+    # Same is mentioned in https://metadata.ftp-master.debian.org/changelogs/main/n/nwchem/unstable_changelog
+    patch("dft-d3_url.patch", when="@7.2.0:7.2.2")
 
     depends_on("blas")
     depends_on("lapack")
