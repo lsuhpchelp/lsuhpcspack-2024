@@ -36,7 +36,8 @@ class Namd(MakefilePackage, CudaPackage):
     )
     version(
         "2.14",
-        sha256="f1516c79b8d6ba72f34f1a2c0b1d09b4eafd4e2f7bb1fc585fd9fe418d141976",
+        #sha256="f1516c79b8d6ba72f34f1a2c0b1d09b4eafd4e2f7bb1fc585fd9fe418d141976",
+        sha256="34044d85d9b4ae61650ccdba5cda4794088c3a9075932392dd0752ef8c049235",
         preferred=True,
     )
 
