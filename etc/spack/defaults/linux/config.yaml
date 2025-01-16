@@ -17,7 +17,8 @@ config:
   # This is the path to the root of the Spack install tree.
   # You can use $spack here to refer to the root of the spack instance.
   install_tree:
-    root: /usr/local/packages
+    root: /usr/local/packages/rhel8
+    #root: /usr/local/packages/
     projections:
       all: "{name}/{version}/{hash:7}"
       gcc: "compilers/{name}/{version}"
